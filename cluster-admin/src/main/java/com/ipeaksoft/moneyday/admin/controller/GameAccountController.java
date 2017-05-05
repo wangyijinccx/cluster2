@@ -241,11 +241,13 @@ public class GameAccountController extends BaseController {
 				clusterGameAccount.setGameId(Integer.parseInt(gameId));
 				clusterGameAccount.setCreateTime(new Date());
 				clusterGameAccount.setModifyTime(new Date());
+				tempRow.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
 				clusterGameAccount.setAccount(tempRow.getCell(1)
 						.getStringCellValue());
 				tempRow.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
 				clusterGameAccount.setPasswd(tempRow.getCell(2)
 						.getStringCellValue());
+				tempRow.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
 				clusterGameAccount.setGameServer(tempRow.getCell(3)
 						.getStringCellValue());
 				tempRow.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
