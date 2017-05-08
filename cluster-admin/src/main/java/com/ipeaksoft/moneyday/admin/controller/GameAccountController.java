@@ -39,9 +39,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.ipeaksoft.moneyday.admin.util.CommonUtil;
 import com.ipeaksoft.moneyday.admin.util.JsonTransfer;
 import com.ipeaksoft.moneyday.core.entity.ClusterAccountUdsc;
+import com.ipeaksoft.moneyday.core.entity.ClusterDms;
 import com.ipeaksoft.moneyday.core.entity.ClusterGame;
 import com.ipeaksoft.moneyday.core.entity.ClusterGameAccount;
 import com.ipeaksoft.moneyday.core.service.ClusterAccountUdscService;
+import com.ipeaksoft.moneyday.core.service.ClusterDmsService;
 import com.ipeaksoft.moneyday.core.service.ClusterGameAccountService;
 import com.ipeaksoft.moneyday.core.service.ClusterGameService;
 import com.ipeaksoft.moneyday.core.service.HttpService;
@@ -58,6 +60,8 @@ public class GameAccountController extends BaseController {
 	private ClusterAccountUdscService clusterAccountUdscService;
 	@Autowired
 	HttpService httpService;
+	@Autowired
+	private ClusterDmsService clusterDmsService;
 
 	@InitBinder
 	protected void initBinder(HttpServletRequest request,
@@ -357,7 +361,9 @@ public class GameAccountController extends BaseController {
 			List<ClusterAccountUdsc> clusterAccountUdsc = clusterAccountUdscService
 					.selectByTaskId(Integer.parseInt(taskId));
 			String udid = clusterAccountUdsc.get(0).getUdid();
-			String url = String.format(stop_script, udid);
+			Integer dmsId= clusterAccountUdsc.get(0).getDmsid();
+			ClusterDms clusterDms = clusterDmsService.selectByPrimaryKey(dmsId);
+			String url = String.format(stop_script,clusterDms.getUrl(), udid);
 			String content = httpService.get(url);
 
 			// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
@@ -390,7 +396,9 @@ public class GameAccountController extends BaseController {
 			List<ClusterAccountUdsc> clusterAccountUdsc = clusterAccountUdscService
 					.selectByTaskId(Integer.parseInt(taskId));
 			String udid = clusterAccountUdsc.get(0).getUdid();
-			String url = String.format(pause_script, udid);
+			Integer dmsId= clusterAccountUdsc.get(0).getDmsid();
+			ClusterDms clusterDms = clusterDmsService.selectByPrimaryKey(dmsId);
+			String url = String.format(pause_script,clusterDms.getUrl(), udid);
 			String content = httpService.get(url);
 
 			// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
@@ -422,7 +430,9 @@ public class GameAccountController extends BaseController {
 			List<ClusterAccountUdsc> clusterAccountUdsc = clusterAccountUdscService
 					.selectByTaskId(Integer.parseInt(taskId));
 			String udid = clusterAccountUdsc.get(0).getUdid();
-			String url = String.format(resume_script, udid);
+			Integer dmsId= clusterAccountUdsc.get(0).getDmsid();
+			ClusterDms clusterDms = clusterDmsService.selectByPrimaryKey(dmsId);
+			String url = String.format(resume_script, clusterDms.getUrl(),udid);
 			String content = httpService.get(url);
 
 			// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
