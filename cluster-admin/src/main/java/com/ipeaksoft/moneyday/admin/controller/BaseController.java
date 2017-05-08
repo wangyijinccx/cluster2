@@ -26,7 +26,7 @@ public class BaseController {
 	//强行停止当前脚本
 	public String stop_script="%s/dms/stop_script?udid=%s";
 	//强行停止所有脚本
-	public String stop_all_scripts = "%s/dms/stop_all_scripts?udid=%s";
+	public String stop_all_scripts = "%s/dms/stop_all_scripts";
 	//暂停当前脚本
 	public String pause_script = "%s/dms/pause_script?udid=%s";
 	//继续当前脚本

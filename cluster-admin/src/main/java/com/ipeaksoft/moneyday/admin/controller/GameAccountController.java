@@ -494,7 +494,7 @@ public class GameAccountController extends BaseController {
 		    	String url= String.format(stop_all_scripts,clusterDms.getUrl());
 		    	String content = httpService.get(url);
 		    	
-		    	// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
+		    	 content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
 		    	
 		    	JSONObject json = JSONObject.parseObject(content);
 				if (null == json
