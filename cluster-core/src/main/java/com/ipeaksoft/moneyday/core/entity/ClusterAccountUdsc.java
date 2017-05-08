@@ -3,83 +3,93 @@ package com.ipeaksoft.moneyday.core.entity;
 import java.util.Date;
 
 public class ClusterAccountUdsc {
-	 private Integer id;
+    private Integer id;
 
-	    private String udid;
+    private String udid;
 
-	    private String internalId;
+    private String internalId;
 
-	    private String scriptsId;
+    private String scriptsId;
 
-	    private String status;
+    private String status;
 
-	    private Date createTime;
+    private Date createTime;
 
-	    private Date modifyTime;
+    private Date modifyTime;
 
-	    private Integer taskid;
+    private Integer taskid;
 
-	    public Integer getId() {
-	        return id;
-	    }
+    private Integer dmsid;
 
-	    public void setId(Integer id) {
-	        this.id = id;
-	    }
+    public Integer getId() {
+        return id;
+    }
 
-	    public String getUdid() {
-	        return udid;
-	    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	    public void setUdid(String udid) {
-	        this.udid = udid;
-	    }
+    public String getUdid() {
+        return udid;
+    }
 
-	    public String getInternalId() {
-	        return internalId;
-	    }
+    public void setUdid(String udid) {
+        this.udid = udid;
+    }
 
-	    public void setInternalId(String internalId) {
-	        this.internalId = internalId;
-	    }
+    public String getInternalId() {
+        return internalId;
+    }
 
-	    public String getScriptsId() {
-	        return scriptsId;
-	    }
+    public void setInternalId(String internalId) {
+        this.internalId = internalId;
+    }
 
-	    public void setScriptsId(String scriptsId) {
-	        this.scriptsId = scriptsId;
-	    }
+    public String getScriptsId() {
+        return scriptsId;
+    }
 
-	    public String getStatus() {
-	        return status;
-	    }
+    public void setScriptsId(String scriptsId) {
+        this.scriptsId = scriptsId;
+    }
 
-	    public void setStatus(String status) {
-	        this.status = status;
-	    }
+    public String getStatus() {
+        return status;
+    }
 
-	    public Date getCreateTime() {
-	        return createTime;
-	    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	    public void setCreateTime(Date createTime) {
-	        this.createTime = createTime;
-	    }
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	    public Date getModifyTime() {
-	        return modifyTime;
-	    }
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	    public void setModifyTime(Date modifyTime) {
-	        this.modifyTime = modifyTime;
-	    }
+    public Date getModifyTime() {
+        return modifyTime;
+    }
 
-	    public Integer getTaskid() {
-	        return taskid;
-	    }
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
+    }
 
-	    public void setTaskid(Integer taskid) {
-	        this.taskid = taskid;
-	    }
+    public Integer getTaskid() {
+        return taskid;
+    }
+
+    public void setTaskid(Integer taskid) {
+        this.taskid = taskid;
+    }
+
+    public Integer getDmsid() {
+        return dmsid;
+    }
+
+    public void setDmsid(Integer dmsid) {
+        this.dmsid = dmsid;
+    }
 }
