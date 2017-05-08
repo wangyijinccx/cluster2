@@ -46,4 +46,5 @@ public interface ClusterGameAccountMapper {
 
 	List<ClusterGameAccount> checkGames(@Param("gameid") Integer gameid,
 			@Param("account") String account, @Param("server") String server);
+	int updateByDms(@Param("dmsid") Integer dmsid);
 }

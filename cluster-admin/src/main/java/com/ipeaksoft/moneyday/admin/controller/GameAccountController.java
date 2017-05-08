@@ -489,21 +489,24 @@ public class GameAccountController extends BaseController {
 	public Long allstop(HttpServletRequest request) {
 		long result = 1001;
 		try {
-			String url = stop_all_scripts;
-			String content = httpService.get(url);
-
-			// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
-
-			JSONObject json = JSONObject.parseObject(content);
-			if (null == json
-					|| (null != json.getString("errCode") && !"0".equals(json
-							.getString("errCode")))) {
-				// 有值就为失败 暂定
-				result = 1002;
-			} else {
-				// 更改状态 这个基本不出错就不判断了
-				clusterGameAccountService.updateStatus();
-			}
+			List<ClusterDms> lists = clusterDmsService.selectAll();
+		    for(ClusterDms clusterDms :lists){
+		    	String url= String.format(stop_all_scripts,clusterDms.getUrl());
+		    	String content = httpService.get(url);
+		    	
+		    	// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
+		    	
+		    	JSONObject json = JSONObject.parseObject(content);
+				if (null == json
+						|| (null != json.getString("errCode") && !"0".equals(json
+								.getString("errCode")))) {
+					// 有一个失败，就判定为失败，需要重新执行
+					result = 1002;
+					return result;
+				}else{
+					clusterGameAccountService.updateByDms(clusterDms.getId());
+				}
+		    }
 		} catch (Exception e) {
 			result = 1002;
 		}

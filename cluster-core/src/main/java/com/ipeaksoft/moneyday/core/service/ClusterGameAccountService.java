@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -248,5 +249,9 @@ public class ClusterGameAccountService extends BaseService {
 	public List<ClusterGameAccount> checkGames(Integer gameid, String account,
 			String server) {
 		return clusterGameAccountMapper.checkGames(gameid, account, server);
+	}
+	
+	public int updateByDms(Integer dmsid){
+		return clusterGameAccountMapper.updateByDms(dmsid);
 	}
 }

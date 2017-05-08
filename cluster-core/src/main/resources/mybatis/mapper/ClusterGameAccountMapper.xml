@@ -235,6 +235,11 @@
 	    where tcga.game_id = #{gameid,jdbcType=INTEGER} and tcga.account=#{account,jdbcType=VARCHAR}
 	     and tcga.game_server = #{server,jdbcType=VARCHAR}
 	</select>
+	
+	<update id="updateByDms" parameterType="java.lang.Integer">
+		update tb_cluster_game_account set `status` = '1'
+	    where id in (select taskid  from tb_cluster_account_udsc where dmsid =#{dmsid,jdbcType=INTEGER})
+	</update>
     
     
 </mapper>
