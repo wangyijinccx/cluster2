@@ -116,9 +116,15 @@
   </update>
   
   <select id="checkDms" resultMap="BaseResultMap" parameterType="java.util.Map">
-	    select 
+      select 
+       <include refid="Base_Column_List" />
+      from tb_cluster_dms 
+      where name =#{name,jdbcType=VARCHAR}  and url = #{url,jdbcType=VARCHAR}
+ </select>
+	
+  <select id="selectAll" resultMap="BaseResultMap" >
+	   select 
 	     <include refid="Base_Column_List" />
-	    from tb_cluster_dms 
-	    where name =#{name,jdbcType=VARCHAR}  and url = #{url,jdbcType=VARCHAR}
+	   from tb_cluster_dms 
 	</select>
 </mapper>

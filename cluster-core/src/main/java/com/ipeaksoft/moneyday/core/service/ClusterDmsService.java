@@ -1,5 +1,7 @@
 package com.ipeaksoft.moneyday.core.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,14 @@ public class ClusterDmsService {
 
 	public ClusterDms checkDms(String name, String url) {
 		return clusterDmsMapper.checkDms(name, url);
+	}
+	
+	public List<ClusterDms> selectAll(){
+		return clusterDmsMapper.selectAll();
+	}
+	
+	public ClusterDms selectByPrimaryKey(Integer id){
+		return clusterDmsMapper.selectByPrimaryKey(id);
 	}
 
 }

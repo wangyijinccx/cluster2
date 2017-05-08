@@ -11,27 +11,26 @@ import com.ipeaksoft.moneyday.core.service.AdminUserService;
 public class BaseController {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public String host ="localhost/dms";
 	// 获得所有设备列表
-	public String devices = "http://"+host+"/devices";
+	public String devices = "%s/dms/devices";
 	// 得到所有的脚本列表
-	public String scripts = "http://"+host+"/scripts";
+	public String scripts = "%s/dms/scripts";
 	// 得到某个游戏有哪些脚本可以跑
-	public String game_scripts = "http://"+host+"/game_scripts?id=%s&version=%s&platform=%s";
+	public String game_scripts = "%s/dms/game_scripts?id=%s&version=%s&platform=%s";
 	// 重启一个设备
-	public String reboot_device = "http://"+host+"/reboot_device?udid=%s";
+	public String reboot_device = "%s/dms/reboot_device?udid=%s";
 	// 执行脚本
-	public String run_script = "http://"+host+"/run_script"
+	public String run_script = "%s/dms/run_script"
 			+ "?udid=%s&internal_id=%s&script_id=%s&game_id=%s"
 			+ "&username=%s&password=%s&server=%s&time=%s&recover=%s";
 	//强行停止当前脚本
-	public String stop_script="http://"+host+"/stop_script?udid=%s";
+	public String stop_script="%s/dms/stop_script?udid=%s";
 	//强行停止所有脚本
-	public String stop_all_scripts = "http://"+host+"/stop_all_scripts?udid=%s";
+	public String stop_all_scripts = "%s/dms/stop_all_scripts?udid=%s";
 	//暂停当前脚本
-	public String pause_script = "http://"+host+"/pause_script?udid=%s";
+	public String pause_script = "%s/dms/pause_script?udid=%s";
 	//继续当前脚本
-	public String resume_script = "http://"+host+"/resume_script?udid=%s";
+	public String resume_script = "%s/dms/resume_script?udid=%s";
 
 	
 	@Autowired

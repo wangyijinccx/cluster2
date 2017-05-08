@@ -1,6 +1,8 @@
 package com.ipeaksoft.moneyday.core.mapper;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.ipeaksoft.moneyday.core.entity.ClusterDms;
@@ -19,4 +21,6 @@ public interface ClusterDmsMapper {
 	int updateByPrimaryKey(ClusterDms record);
 
 	ClusterDms checkDms(@Param("name") String name, @Param("url") String url);
+	
+	List<ClusterDms> selectAll();
 }
