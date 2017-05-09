@@ -231,6 +231,7 @@ public class ClusterGameAccountService extends BaseService {
 						// clusterPool.add(clusterGameAccount);
 						// continue;
 					}
+					lists = clusterDmsService.selectAll();
 				}
 
 			}
