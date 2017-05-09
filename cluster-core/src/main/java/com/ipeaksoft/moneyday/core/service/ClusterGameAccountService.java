@@ -272,7 +272,6 @@ public class ClusterGameAccountService extends BaseService {
 		Integer time;
 		String internal_id = "";
 		ClusterDms dms = null;
-		Boolean b = true;
 		List<ClusterDms> lists = clusterDmsService.selectAll();
 		if (lists.size() > 0) {
 			ClusterPool clusterPool = ClusterPool.getInstance();
@@ -293,7 +292,9 @@ public class ClusterGameAccountService extends BaseService {
 						//pc下的所有设备
 						url = String.format(devices, url);
 						String callback = httpService.get(url);
-						// callback = TestDeom.getCall();
+						
+					    callback = TestDeom.getCall();
+					    
 						JSONObject json = JSONObject.parseObject(callback);
 
 						//获取设备异常，则查看下一台pc
@@ -329,7 +330,7 @@ public class ClusterGameAccountService extends BaseService {
 									String callback_scr = httpService
 											.get(url_scr);
 
-									// callback_scr = TestDeom.getScr();
+									callback_scr = TestDeom.getScr();
 
 									JSONObject json_scr = JSONObject
 											.parseObject(callback_scr);
@@ -364,8 +365,7 @@ public class ClusterGameAccountService extends BaseService {
 									logger.info("adcluster-url_do:{}", url_do);
 									String doback = httpService.get(url_do);
 
-									// doback =
-									// "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
+									doback = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
 
 									JSONObject json_doback = JSONObject
 											.parseObject(doback);
@@ -393,8 +393,6 @@ public class ClusterGameAccountService extends BaseService {
 												.setInternalId(internal_id);
 										clusterAccountUdsc
 												.setScriptsId(script_id);
-										clusterAccountUdsc
-												.setCreateTime(new Date());
 										clusterAccountUdsc
 												.setModifyTime(new Date());
 										clusterAccountUdsc
@@ -433,10 +431,6 @@ public class ClusterGameAccountService extends BaseService {
 										// clusterPool.add(clusterGameAccount);
 										// continue;
 									}
-									
-									
-									b = false;
-									lists.remove(clusterDms);
 									break w;
 								}
 							}
