@@ -82,6 +82,7 @@ public class ClusterGameAccountService extends BaseService {
 		Integer time;
 		String internal_id = "";
 		ClusterDms dms = null;
+		Boolean b = true;
 		List<ClusterDms> lists = clusterDmsService.selectAll();
 		if (lists.size() > 0) {
 			ClusterPool clusterPool = ClusterPool.getInstance();
@@ -119,6 +120,7 @@ public class ClusterGameAccountService extends BaseService {
 									dms = clusterDms;
 									udid = item.getString("udid");
 									internal_id = item.getString("internalId");
+									b =false;
 									lists.remove(clusterDms);
 									break w;
 								}
@@ -127,9 +129,11 @@ public class ClusterGameAccountService extends BaseService {
 					}
 
 					// 如果没有空闲设备
-					if (StringUtils.isBlank(udid)) {
+					if (b) {
 						clusterPool.add(clusterGameAccount);
 						continue;
+					}else{
+						b =true;
 					}
 
 					// 匹配脚本
