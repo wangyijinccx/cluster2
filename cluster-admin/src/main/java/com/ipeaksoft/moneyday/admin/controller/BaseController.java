@@ -22,7 +22,7 @@ public class BaseController {
 	// 执行脚本
 	public String run_script = "%s/dms/run_script"
 			+ "?udid=%s&internal_id=%s&script_id=%s&game_id=%s"
-			+ "&username=%s&password=%s&server=%s&time=%s&recover=%s";
+			+ "&username=%s&password=%s&server=%s&time=%s&recover=";
 	//强行停止当前脚本
 	public String stop_script="%s/dms/stop_script?udid=%s";
 	//强行停止所有脚本
