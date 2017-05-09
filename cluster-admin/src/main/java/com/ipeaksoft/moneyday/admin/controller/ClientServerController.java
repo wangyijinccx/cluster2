@@ -76,38 +76,35 @@ public class ClientServerController extends BaseController {
 			url = String.format(devices, url);
 			String callback = httpService.get(url);
 
-			callback = TestDeom.getCall();
+			//callback = TestDeom.getCall();
 			JSONObject json = JSONObject.parseObject(callback);
 
 			if (null == json
 					|| (null != json.getString("errCode") && !"0".equals(json
 							.getString("errCode")))) {
-				result = "[]";
-				result = "{\"draw\":" + sEcho + ",\"recordsTotal\":" + pageSize
-						+ ",\"recordsFiltered\":0,\"data\":" + result + "}";
-				return result;
-			}
-			JSONArray devices = json.getJSONArray("devices");
-			for (int i = 0; i < devices.size(); i++) {
-				JSONObject item = devices.getJSONObject(i);
-				String state = item.getString("state");
-				if ("BUSY".equalsIgnoreCase(state)) {
-					String gameId = item.getString("gameId");
-					String account = item.getString("username");
-					String server = item.getString("server");
-					Map<String, Object> map = clusterGameAccountService
-							.selectGames(gameId, account, server);
-					String gameName = (String) map.get("name");
-					item.put("gameName", gameName);
-					String scriptState = item.getString("scriptState");
-					String scrStatus = Status.valueOf(scriptState).getKey();
-					item.put("scrStatus", scrStatus);
-					item.put("id", (Integer) map.get("id"));
-					item.put("dmsId", dmsId);
-				}else{
-					item.put("dmsId", dmsId);
+			} else {
+				JSONArray devices = json.getJSONArray("devices");
+				for (int i = 0; i < devices.size(); i++) {
+					JSONObject item = devices.getJSONObject(i);
+					String state = item.getString("state");
+					if ("BUSY".equalsIgnoreCase(state)) {
+						String gameId = item.getString("gameId");
+						String account = item.getString("username");
+						String server = item.getString("server");
+						Map<String, Object> map = clusterGameAccountService
+								.selectGames(gameId, account, server);
+						String gameName = (String) map.get("name");
+						item.put("gameName", gameName);
+						String scriptState = item.getString("scriptState");
+						String scrStatus = Status.valueOf(scriptState).getKey();
+						item.put("scrStatus", scrStatus);
+						item.put("id", (Integer) map.get("id"));
+						item.put("dmsId", dmsId);
+					} else {
+						item.put("dmsId", dmsId);
+					}
+					jsonArrays.add(item);
 				}
-				jsonArrays.add(item);
 			}
 		}
 
@@ -125,8 +122,10 @@ public class ClientServerController extends BaseController {
 		try {
 			String udid = request.getParameter("id");
 			String dmsId = request.getParameter("dmsId");
-			ClusterDms clusterDms = clusterDmsService.selectByPrimaryKey(Integer.parseInt(dmsId));
-			String url = String.format(reboot_device,clusterDms.getUrl(), udid);
+			ClusterDms clusterDms = clusterDmsService
+					.selectByPrimaryKey(Integer.parseInt(dmsId));
+			String url = String
+					.format(reboot_device, clusterDms.getUrl(), udid);
 			String content = httpService.get(url);
 
 			// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
