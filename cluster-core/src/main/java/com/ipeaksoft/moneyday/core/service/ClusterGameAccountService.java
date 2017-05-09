@@ -108,7 +108,7 @@ public class ClusterGameAccountService extends BaseService {
 						if (null == json
 								|| (null != json.getString("errCode") && !"0"
 										.equals(json.getString("errCode")))) {
-							// 
+							//
 							// clusterPool.add(clusterGameAccount);
 							// continue;
 						} else {
@@ -285,24 +285,23 @@ public class ClusterGameAccountService extends BaseService {
 					server = clusterGameAccount.getGameServer();
 					time = (clusterGameAccount.getRunTime()) * 60;
 
-					// 匹配设备 所有pc的所有设备，为防止监控端异常，遇到任务请求问题，都重新加入队列，等待下次执行。防止一直循环，不释放锁
+					// 匹配设备
+					// 所有pc的所有设备，为防止监控端异常，遇到任务请求问题，都重新加入队列，等待下次执行。防止一直循环，不释放锁
 					w: for (ClusterDms clusterDms : lists) {
 						Integer dmsId = clusterDms.getId();
 						String url = clusterDms.getUrl();
-						//pc下的所有设备
+						// pc下的所有设备
 						url = String.format(devices, url);
 						String callback = httpService.get(url);
-						
-					    //callback = TestDeom.getCall();
-					    
+
+						// callback = TestDeom.getCall();
+
 						JSONObject json = JSONObject.parseObject(callback);
 
-						//获取设备异常，则查看下一台pc
+						// 获取设备异常，则查看下一台pc
 						if (null == json
 								|| (null != json.getString("errCode") && !"0"
 										.equals(json.getString("errCode")))) {
-							// clusterPool.add(clusterGameAccount);
-							// continue;
 						} else {
 							JSONArray devices = json.getJSONArray("devices");
 							n: for (int i = 0; i < devices.size(); i++) {
@@ -330,11 +329,11 @@ public class ClusterGameAccountService extends BaseService {
 									String callback_scr = httpService
 											.get(url_scr);
 
-									//callback_scr = TestDeom.getScr();
+									// callback_scr = TestDeom.getScr();
 
 									JSONObject json_scr = JSONObject
 											.parseObject(callback_scr);
-									//如果没有获取到脚本，或者获取脚本失败，那就不执行这个任务了，放在下次执行。
+									// 如果没有获取到脚本，或者获取脚本失败，那就不执行这个任务了，放在下次执行。
 									if (null == json_scr
 											|| (null != json_scr
 													.getString("errCode") && !"0"
@@ -365,11 +364,12 @@ public class ClusterGameAccountService extends BaseService {
 									logger.info("adcluster-url_do:{}", url_do);
 									String doback = httpService.get(url_do);
 
-									//doback = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
+									// doback =
+									// "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
 
 									JSONObject json_doback = JSONObject
 											.parseObject(doback);
-									//如果脚本执行异常，那就不执行这个任务了，放在下次执行
+									// 如果脚本执行异常，那就不执行这个任务了，放在下次执行
 									if (null == json_doback
 											|| (null != json_doback
 													.getString("errCode") && !"0"
@@ -397,11 +397,8 @@ public class ClusterGameAccountService extends BaseService {
 												.setModifyTime(new Date());
 										clusterAccountUdsc
 												.setDmsid(dms.getId());
-										if (clusterAccountUdscService
-												.updateByPrimaryKeySelective(clusterAccountUdsc) < 1) {
-											// clusterPool.add(clusterGameAccount);
-											// continue;
-										}
+										clusterAccountUdscService
+												.updateByPrimaryKeySelective(clusterAccountUdsc);
 									} else {
 										ClusterAccountUdsc clusterAccountUdsc = new ClusterAccountUdsc();
 										clusterAccountUdsc.setTaskid(taskId);
@@ -416,21 +413,15 @@ public class ClusterGameAccountService extends BaseService {
 												.setModifyTime(new Date());
 										clusterAccountUdsc
 												.setDmsid(dms.getId());
-										if (clusterAccountUdscService
-												.insertSelective(clusterAccountUdsc) < 1) {
-											// clusterPool.add(clusterGameAccount);
-											// continue;
-										}
+										clusterAccountUdscService
+												.insertSelective(clusterAccountUdsc);
 									}
 
 									// 更改状态
 									ClusterGameAccount model = new ClusterGameAccount();
 									model.setId(taskId);
 									model.setStatus("2");
-									if (this.updateByPrimaryKeySelective(model) < 1) {
-										// clusterPool.add(clusterGameAccount);
-										// continue;
-									}
+									this.updateByPrimaryKeySelective(model);
 									break w;
 								}
 							}

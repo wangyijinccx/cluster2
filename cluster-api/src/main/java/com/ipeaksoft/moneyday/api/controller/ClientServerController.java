@@ -92,7 +92,7 @@ public class ClientServerController extends BaseController {
 		String gameId = json.getString("gameId");
 		String account = json.getString("username");
 		String server = json.getString("server");
-		String result = json.getString("result");
+		String result = json.getString("state");
 		Map<String, Object> map = clusterGameAccountService.selectGames(gameId,
 				account, server);
 		String scrStatus = Status.valueOf(result).getKey();
