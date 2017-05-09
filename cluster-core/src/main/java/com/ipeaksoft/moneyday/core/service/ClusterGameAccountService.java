@@ -293,7 +293,7 @@ public class ClusterGameAccountService extends BaseService {
 						url = String.format(devices, url);
 						String callback = httpService.get(url);
 						
-					    callback = TestDeom.getCall();
+					    //callback = TestDeom.getCall();
 					    
 						JSONObject json = JSONObject.parseObject(callback);
 
@@ -330,7 +330,7 @@ public class ClusterGameAccountService extends BaseService {
 									String callback_scr = httpService
 											.get(url_scr);
 
-									callback_scr = TestDeom.getScr();
+									//callback_scr = TestDeom.getScr();
 
 									JSONObject json_scr = JSONObject
 											.parseObject(callback_scr);
@@ -365,7 +365,7 @@ public class ClusterGameAccountService extends BaseService {
 									logger.info("adcluster-url_do:{}", url_do);
 									String doback = httpService.get(url_do);
 
-									doback = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
+									//doback = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
 
 									JSONObject json_doback = JSONObject
 											.parseObject(doback);
