@@ -124,7 +124,7 @@ public class HttpService extends BaseService {
                 result = responseStr;
             }
         } catch (Exception e) {
-            logger.error("ERROR:{}", url, e);
+           // logger.error("ERROR:{}", url, e);
         } finally {
             try {
                 if (response != null)

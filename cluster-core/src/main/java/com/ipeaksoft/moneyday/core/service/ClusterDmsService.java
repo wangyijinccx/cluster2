@@ -21,13 +21,18 @@ public class ClusterDmsService {
 	public ClusterDms checkDms(String name, String url) {
 		return clusterDmsMapper.checkDms(name, url);
 	}
-	
-	public List<ClusterDms> selectAll(){
+
+	public List<ClusterDms> selectAll() {
 		return clusterDmsMapper.selectAll();
 	}
-	
-	public ClusterDms selectByPrimaryKey(Integer id){
+
+	public ClusterDms selectByPrimaryKey(Integer id) {
 		return clusterDmsMapper.selectByPrimaryKey(id);
+	}
+
+	public int updateByPrimaryKeySelective(ClusterDms record) {
+		return clusterDmsMapper.updateByPrimaryKeySelective(record);
+
 	}
 
 }

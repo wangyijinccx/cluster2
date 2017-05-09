@@ -49,6 +49,7 @@ public class ClientServerController extends BaseController {
 	@RequestMapping(value = "/dms_register")
 	public String dms_register(String base_url, String name,
 			HttpServletRequest request) {
+		logger.info("adcluster base_url:{},name:{}" ,base_url,name);
 		String result = "{\"errCode\":0,\"errMsg\":\"添加成功\"}";
 		try {
 			ClusterDms cdms = clusterDmsService.checkDms(name, base_url);
