@@ -23,7 +23,7 @@ public class ScheduleService extends BaseService {
     @Scheduled(cron = "*/30 * * * * ?")
     public void doTask(){
         logger.info("adcluster-doTask().........");
-        clusterGameAccountService.daTask();
+        clusterGameAccountService.daTask2();
         logger.info("adcluster-doTask() end.........");
     }
     
