@@ -77,7 +77,7 @@ public class ClientServerController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/script_result", method = (RequestMethod.POST))
-	public void script_result(HttpServletRequest request) throws IOException {
+	public String script_result(HttpServletRequest request) throws IOException {
 		BufferedReader reader = request.getReader();
 		char[] buf = new char[512];
 		int len = 0;
@@ -86,8 +86,9 @@ public class ClientServerController extends BaseController {
 			contentBuffer.append(buf, 0, len);
 		}
 		String content = contentBuffer.toString();
+		logger.info("doClouset-content:{}",content);
 		if (content == null) {
-			content = "";
+			return "{\"errCode\":1003,\"errMsg\":\"接收失败\"}";
 		}
 		JSONObject json = JSONObject.parseObject(content);
 		String gameId = json.getString("gameId");
@@ -103,5 +104,6 @@ public class ClientServerController extends BaseController {
 			model.setStatus(scrStatus);
 			clusterGameAccountService.updateByPrimaryKeySelective(model);
 		}
+		return "{\"errCode\":0,\"errMsg\":\"接收成功\"}";
 	}
 }

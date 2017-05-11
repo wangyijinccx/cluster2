@@ -200,6 +200,11 @@ public class GameAccountController extends BaseController {
 				model.setGameServer(clusterGameAccount.getGameServer());
 				model.setRunTime(clusterGameAccount.getRunTime());
 				model.setModifyTime(new Date());
+				if (clusterGameAccountService
+						.updateByPrimaryKeySelective(model) < 1) {
+					result = "{\"status\":true,\"msg\":\"更新失败\"}";
+				}
+				/*
 				List<ClusterGameAccount> lists = clusterGameAccountService
 						.checkGames(model.getGameId(), model.getAccount(),
 								model.getGameServer());
@@ -210,7 +215,7 @@ public class GameAccountController extends BaseController {
 							.updateByPrimaryKeySelective(model) < 1) {
 						result = "{\"status\":true,\"msg\":\"更新失败\"}";
 					}
-				}
+				}*/
 			}
 
 		} catch (Exception e) {
