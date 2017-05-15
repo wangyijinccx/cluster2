@@ -2,6 +2,9 @@ package com.ipeaksoft.moneyday.core.entity;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
+
+
 public class ClusterDms {
     private Integer id;
 
@@ -16,6 +19,8 @@ public class ClusterDms {
     private Date modifyTime;
 
     private String status;
+
+    private String extUrl;
 
     public Integer getId() {
         return id;
@@ -71,5 +76,19 @@ public class ClusterDms {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getExtUrl() {
+        return extUrl;
+    }
+
+    public void setExtUrl(String extUrl) {
+        this.extUrl = extUrl;
+    }
+    
+    public String getAvailableUrl(){
+    	String url = this.getUrl();
+    	String extUrl = this.getExtUrl();
+    	return StringUtils.isBlank(extUrl)?url:extUrl;
     }
 }

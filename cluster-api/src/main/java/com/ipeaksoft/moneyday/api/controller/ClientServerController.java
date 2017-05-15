@@ -47,7 +47,7 @@ public class ClientServerController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/dms_register")
-	public String dms_register(String base_url, String name,
+	public String dms_register(String base_url, String name,String ext_base_url,
 			HttpServletRequest request) {
 		logger.info("adcluster base_url:{},name:{}" ,base_url,name);
 		String result = "{\"errCode\":0,\"errMsg\":\"添加成功\"}";
@@ -61,6 +61,7 @@ public class ClientServerController extends BaseController {
 			clusterDms.setIndicate(indicate);
 			clusterDms.setUrl(base_url);
 			clusterDms.setName(name);
+			clusterDms.setExtUrl(ext_base_url);
 			// clusterDms.setStatus("normal");
 			clusterDms.setModifyTime(new Date());
 			clusterDms.setCreateTime(new Date());

@@ -72,7 +72,7 @@ public class ClientServerController extends BaseController {
 		// 处理每个监控服务器
 		for (ClusterDms clusterDms : lists) {
 			Integer dmsId = clusterDms.getId();
-			String url = clusterDms.getUrl();
+			String url = clusterDms.getAvailableUrl();
 			url = String.format(devices, url);
 			String callback = httpService.get(url);
 
@@ -125,7 +125,7 @@ public class ClientServerController extends BaseController {
 			ClusterDms clusterDms = clusterDmsService
 					.selectByPrimaryKey(Integer.parseInt(dmsId));
 			String url = String
-					.format(reboot_device, clusterDms.getUrl(), udid);
+					.format(reboot_device, clusterDms.getAvailableUrl(), udid);
 			String content = httpService.get(url);
 
 			// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";

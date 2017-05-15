@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ipeaksoft.moneyday.core.mapper.ClusterDmsMapper" >
-  <resultMap id="BaseResultMap" type="com.ipeaksoft.moneyday.core.entity.ClusterDms" >
+   <resultMap id="BaseResultMap" type="com.ipeaksoft.moneyday.core.entity.ClusterDms" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="indicate" property="indicate" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
@@ -9,9 +9,10 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="ext_url" property="extUrl" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, indicate, url, name, create_time, modify_time, status
+    id, indicate, url, name, create_time, modify_time, status, ext_url
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,10 +27,10 @@
   <insert id="insert" parameterType="com.ipeaksoft.moneyday.core.entity.ClusterDms" >
     insert into tb_cluster_dms (id, indicate, url, 
       name, create_time, modify_time, 
-      status)
+      status, ext_url)
     values (#{id,jdbcType=INTEGER}, #{indicate,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=VARCHAR})
+      #{status,jdbcType=VARCHAR}, #{extUrl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ipeaksoft.moneyday.core.entity.ClusterDms" >
     insert into tb_cluster_dms
@@ -55,6 +56,9 @@
       <if test="status != null" >
         status,
       </if>
+      <if test="extUrl != null" >
+        ext_url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -77,6 +81,9 @@
       </if>
       <if test="status != null" >
         #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="extUrl != null" >
+        #{extUrl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -101,6 +108,9 @@
       <if test="status != null" >
         status = #{status,jdbcType=VARCHAR},
       </if>
+      <if test="extUrl != null" >
+        ext_url = #{extUrl,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -111,7 +121,8 @@
       name = #{name,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       modify_time = #{modifyTime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=VARCHAR}
+      status = #{status,jdbcType=VARCHAR},
+      ext_url = #{extUrl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   

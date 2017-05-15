@@ -99,7 +99,7 @@ public class ClusterGameAccountService extends BaseService {
 					// 匹配设备 所有pc的所有设备
 					w: for (ClusterDms clusterDms : lists) {
 						Integer dmsId = clusterDms.getId();
-						String url = clusterDms.getUrl();
+						String url = clusterDms.getAvailableUrl();
 						url = String.format(devices, url);
 						String callback = httpService.get(url);
 						// callback = TestDeom.getCall();
@@ -143,7 +143,7 @@ public class ClusterGameAccountService extends BaseService {
 							.selectByPrimaryKey(gameid);
 
 					String url_scr = String
-							.format(game_scripts, dms.getUrl(),
+							.format(game_scripts, dms.getAvailableUrl(),
 									clusterGame.getBundleid(),
 									clusterGame.getVersion(),
 									clusterGame.getPlatform());
@@ -170,7 +170,7 @@ public class ClusterGameAccountService extends BaseService {
 						}
 					}
 
-					String url_do = String.format(run_script, dms.getUrl(),
+					String url_do = String.format(run_script, dms.getAvailableUrl(),
 							udid, internal_id, script_id,
 							clusterGame.getBundleid(), username, password,
 							server, time);
@@ -289,7 +289,7 @@ public class ClusterGameAccountService extends BaseService {
 					// 所有pc的所有设备，为防止监控端异常，遇到任务请求问题，都重新加入队列，等待下次执行。防止一直循环，不释放锁
 					w: for (ClusterDms clusterDms : lists) {
 						Integer dmsId = clusterDms.getId();
-						String url = clusterDms.getUrl();
+						String url = clusterDms.getAvailableUrl();
 						// pc下的所有设备
 						url = String.format(devices, url);
 						String callback = httpService.get(url);
@@ -320,7 +320,7 @@ public class ClusterGameAccountService extends BaseService {
 											.selectByPrimaryKey(gameid);
 
 									String url_scr = String.format(
-											game_scripts, dms.getUrl(),
+											game_scripts, dms.getAvailableUrl(),
 											clusterGame.getBundleid(),
 											clusterGame.getVersion(),
 											clusterGame.getPlatform());
@@ -355,7 +355,7 @@ public class ClusterGameAccountService extends BaseService {
 										}
 									}
 									String url_do = String.format(run_script,
-											dms.getUrl(), udid, internal_id,
+											dms.getAvailableUrl(), udid, internal_id,
 											script_id,
 											clusterGame.getBundleid(),
 											username, password, server, time);

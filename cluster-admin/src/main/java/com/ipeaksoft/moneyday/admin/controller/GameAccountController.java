@@ -368,7 +368,7 @@ public class GameAccountController extends BaseController {
 			String udid = clusterAccountUdsc.get(0).getUdid();
 			Integer dmsId= clusterAccountUdsc.get(0).getDmsid();
 			ClusterDms clusterDms = clusterDmsService.selectByPrimaryKey(dmsId);
-			String url = String.format(stop_script,clusterDms.getUrl(), udid);
+			String url = String.format(stop_script,clusterDms.getAvailableUrl(), udid);
 			String content = httpService.get(url);
 
 			// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
@@ -403,7 +403,7 @@ public class GameAccountController extends BaseController {
 			String udid = clusterAccountUdsc.get(0).getUdid();
 			Integer dmsId= clusterAccountUdsc.get(0).getDmsid();
 			ClusterDms clusterDms = clusterDmsService.selectByPrimaryKey(dmsId);
-			String url = String.format(pause_script,clusterDms.getUrl(), udid);
+			String url = String.format(pause_script,clusterDms.getAvailableUrl(), udid);
 			String content = httpService.get(url);
 
 			// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
@@ -437,7 +437,7 @@ public class GameAccountController extends BaseController {
 			String udid = clusterAccountUdsc.get(0).getUdid();
 			Integer dmsId= clusterAccountUdsc.get(0).getDmsid();
 			ClusterDms clusterDms = clusterDmsService.selectByPrimaryKey(dmsId);
-			String url = String.format(resume_script, clusterDms.getUrl(),udid);
+			String url = String.format(resume_script, clusterDms.getAvailableUrl(),udid);
 			String content = httpService.get(url);
 
 			// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
@@ -496,7 +496,7 @@ public class GameAccountController extends BaseController {
 		try {
 			List<ClusterDms> lists = clusterDmsService.selectAll();
 		    for(ClusterDms clusterDms :lists){
-		    	String url= String.format(stop_all_scripts,clusterDms.getUrl());
+		    	String url= String.format(stop_all_scripts,clusterDms.getAvailableUrl());
 		    	String content = httpService.get(url);
 		    	
 		    	 content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
