@@ -47,14 +47,14 @@ public class ClientServerController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/dms_register")
-	public String dms_register(String base_url, String name,String ext_base_url,
+	public synchronized String dms_register(String base_url, String name,String ext_base_url,
 			HttpServletRequest request) {
 		logger.info("adcluster base_url:{},name:{}" ,base_url,name);
 		String result = "{\"errCode\":0,\"errMsg\":\"添加成功\"}";
 		try {
 			ClusterDms cdms = clusterDmsService.checkDms(name, base_url);
 			if (null != cdms) {
-				return "{\"id\":" + cdms.getIndicate() + "}";
+				return "{\"id\":\"" + cdms.getIndicate() + "\"}";
 			}
 			ClusterDms clusterDms = new ClusterDms();
 			String indicate = UUID.randomUUID().toString().replace("-", ""); // 服务器标示
@@ -68,10 +68,10 @@ public class ClientServerController extends BaseController {
 			if (clusterDmsService.insertSelective(clusterDms) < 1) {
 				result = "{\"errCode\":1001,\"errMsg\":\"添加失败\"}";
 			} else {
-				result = "{\"id\":" + indicate + "}";
+				result = "{\"id\":\"" + indicate + "\"}";
 			}
 		} catch (Exception e) {
-			result = "{\"status\":1002,\"msg\":\"未知异常\"}";
+			result = "{\"errCode\":1002,\"msg\":\"未知异常\"}";
 		}
 		return result;
 	}
