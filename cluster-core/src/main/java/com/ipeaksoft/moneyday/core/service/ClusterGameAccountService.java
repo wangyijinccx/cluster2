@@ -334,6 +334,8 @@ public class ClusterGameAccountService extends BaseService {
 									JSONObject json_scr = JSONObject
 											.parseObject(callback_scr);
 									// 如果没有获取到脚本，或者获取脚本失败，那就不执行这个任务了，放在下次执行。
+									// 虽然最后判了状态，但双重保险，防止数据丢失
+									// 因为最后加了验证状态，break n更好些
 									if (null == json_scr
 											|| (null != json_scr
 													.getString("errCode") && !"0"
@@ -426,6 +428,12 @@ public class ClusterGameAccountService extends BaseService {
 								}
 							}
 						}
+					}
+					
+					//如果匹配的设备都不合适，则重新加入到队列
+					ClusterGameAccount clusterGA = this.selectByPrimaryKey(taskId);
+					if("5".equals(clusterGA.getStatus())){
+						clusterPool.add(clusterGameAccount);
 					}
 				}
 			}
