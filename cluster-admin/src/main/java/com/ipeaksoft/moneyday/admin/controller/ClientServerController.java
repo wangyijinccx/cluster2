@@ -140,12 +140,15 @@ public class ClientServerController extends BaseController {
 							.getString("errCode")))) {
 				result = 1002;
 			}else{
-				ClusterGameAccount model = new ClusterGameAccount();
-				model.setId(Integer.parseInt(taskid));
-				model.setStatus("1");
-				clusterGameAccountService.updateByPrimaryKeySelective(model);
+				if(!"undefined".equals(taskid)){
+					ClusterGameAccount model = new ClusterGameAccount();
+					model.setId(Integer.parseInt(taskid));
+					model.setStatus("1");
+					clusterGameAccountService.updateByPrimaryKeySelective(model);
+				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			result = 1002;
 		}
 		return result;
