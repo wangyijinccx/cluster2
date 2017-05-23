@@ -201,7 +201,9 @@ $(function(){
 													return '<a type="button" class="btn btn-primary btn-xs" href="javascript:resume(\''+ row.id +'\')">继续</a>'
 													+'<a type="button" class="btn btn-primary btn-xs" href="javascript:stop(\''+ row.id +'\')">停止</a>';
 												}else if(row.status == 5){
-													return '<a type="button" class="btn btn-primary btn-xs" href="javascript:distribution()">分配中</a>';
+													return '<a type="button" class="btn btn-primary btn-xs" href="javascript:distribution(\''+ row.id +'\')">分配中</a>';
+												}else if(row.status == 6){
+													return '<a type="button" class="btn btn-primary btn-xs"  href="javascript:reset()")">取消分配中</a>';
 												}
 												
 											}
@@ -222,8 +224,36 @@ $(function(){
 			alert("执行中请等待");
 		}
 		
-		function distribution(){
-			alert("分配中，请稍后刷新重试");
+		function reset(){
+			alert("取消分配中请等待");
+			$('#datalist').dataTable().fnDraw();
+		}
+		
+		function distribution(id){
+			if (confirm('是否取消分配?请慎重选择!')) {
+				$.ajax({
+					type : "GET",
+					url : '${pageContext.request.contextPath}/game/account/reset',
+					data : {
+						id : id
+					},
+					error : function(request) {
+						console.inf('链接错误');
+	
+					},
+					success : function(data) {
+						if (1001 == data) {
+							alert('已取消分配');
+							$('#datalist').dataTable().fnDraw();
+						} else if(1003 == data){
+							alert('任务已分配完毕');
+							$('#datalist').dataTable().fnDraw();
+						}else {
+							alert('取消分配失败');
+						}
+					}
+				});
+			}
 		}
 		
 		$('#btn_collect_export').on('click', function(e) {

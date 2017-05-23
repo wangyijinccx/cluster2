@@ -517,5 +517,32 @@ public class GameAccountController extends BaseController {
 		}
 		return result;
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/reset")
+	public Long reset(HttpServletRequest request) {
+		long result = 1001;
+		try {
+			String id = request.getParameter("id");
+			// 添加带执行账号到队列
+			ClusterGameAccount clusterGameAccount = clusterGameAccountService
+					.selectByPrimaryKey(Integer.parseInt(id));
+            if("5".equals(clusterGameAccount.getStatus())){
+            	//分配中，停止分配
+            	ClusterGameAccount model = new ClusterGameAccount();
+    			model.setId(Integer.parseInt(id));
+    			model.setStatus("6");
+    			clusterGameAccountService.updateByPrimaryKeySelective(model);
+            }else{
+            	//如果是其他状态，就不停止分配
+            	result = 1003;
+            }
+			
+		} catch (Exception e) {
+			result = 1002;
+		}
+		return result;
+	}
 
 }
