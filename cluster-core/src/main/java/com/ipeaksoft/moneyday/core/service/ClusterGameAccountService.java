@@ -434,6 +434,12 @@ public class ClusterGameAccountService extends BaseService {
 					ClusterGameAccount clusterGA = this.selectByPrimaryKey(taskId);
 					if("5".equals(clusterGA.getStatus())){
 						clusterPool.add(clusterGameAccount);
+					}else if("6".equals(clusterGA.getStatus())){
+						//如果强制异常处理
+						ClusterGameAccount model = new ClusterGameAccount();
+						model.setId(taskId);
+						model.setStatus("1");
+						this.updateByPrimaryKeySelective(model);
 					}
 				}
 			}

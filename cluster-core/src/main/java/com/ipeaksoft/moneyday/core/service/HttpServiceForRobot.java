@@ -18,8 +18,8 @@ public class HttpServiceForRobot extends BaseService {
 	public String get(String url) {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		RequestConfig requestConfig = RequestConfig.custom()
-				.setConnectTimeout(5000).setConnectionRequestTimeout(1000)
-				.setSocketTimeout(5000).build();
+				.setConnectTimeout(10000).setConnectionRequestTimeout(10000)
+				.setSocketTimeout(10000).build();
 		long time = System.currentTimeMillis();
 		CloseableHttpResponse response = null;
 		String result = null;

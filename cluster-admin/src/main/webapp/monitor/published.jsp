@@ -120,7 +120,7 @@ div.dataTables_info {
 										},
 										{
 											"render" : function(data, type, row) {
-												return '<a type="button" class="btn btn-primary btn-xs" href="javascript:reboot(\''+ row.udid +'\',\''+ row.dmsId +'\')">重启</a>'	;	
+												return '<a type="button" class="btn btn-primary btn-xs" href="javascript:reboot(\''+ row.udid +'\',\''+ row.dmsId +'\',\''+ row.id +'\')">重启</a>'	;	
 											}
 										},
 										{
@@ -196,14 +196,15 @@ div.dataTables_info {
 			alert("执行中请等待");
 		}
 		
-		function reboot(id,dmsId) {
+		function reboot(id,dmsId,taskid) {
 			if (confirm('确定执行此操作吗？')) {
 				$.ajax({
 					type : "GET",
 					url : '${pageContext.request.contextPath}/cserver/reboot',
 					data : {
 						id : id,
-						dmsId : dmsId
+						dmsId : dmsId,
+						taskid : taskid
 					},
 					error : function(request) {
 						console.inf('链接错误');

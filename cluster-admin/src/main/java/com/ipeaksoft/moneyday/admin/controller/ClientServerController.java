@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ipeaksoft.moneyday.core.entity.ClusterDms;
+import com.ipeaksoft.moneyday.core.entity.ClusterGameAccount;
 import com.ipeaksoft.moneyday.core.enums.Status;
 import com.ipeaksoft.moneyday.core.service.ClusterAccountUdscService;
 import com.ipeaksoft.moneyday.core.service.ClusterDmsService;
@@ -124,6 +125,7 @@ public class ClientServerController extends BaseController {
 		try {
 			String udid = request.getParameter("id");
 			String dmsId = request.getParameter("dmsId");
+			String taskid = request.getParameter("taskid");
 			ClusterDms clusterDms = clusterDmsService
 					.selectByPrimaryKey(Integer.parseInt(dmsId));
 			String url = String
@@ -137,6 +139,11 @@ public class ClientServerController extends BaseController {
 					|| (null != json.getString("errCode") && !"0".equals(json
 							.getString("errCode")))) {
 				result = 1002;
+			}else{
+				ClusterGameAccount model = new ClusterGameAccount();
+				model.setId(Integer.parseInt(taskid));
+				model.setStatus("1");
+				clusterGameAccountService.updateByPrimaryKeySelective(model);
 			}
 		} catch (Exception e) {
 			result = 1002;
