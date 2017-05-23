@@ -26,7 +26,7 @@ import com.ipeaksoft.moneyday.core.service.ClusterAccountUdscService;
 import com.ipeaksoft.moneyday.core.service.ClusterDmsService;
 import com.ipeaksoft.moneyday.core.service.ClusterGameAccountService;
 import com.ipeaksoft.moneyday.core.service.HttpService;
-import com.ipeaksoft.moneyday.core.util.TestDeom;
+import com.ipeaksoft.moneyday.core.service.HttpServiceForRobot;
 
 @Controller
 @RequestMapping(value = "/cserver")
@@ -35,6 +35,8 @@ public class ClientServerController extends BaseController {
 	private ClusterDmsService clusterDmsService;
 	@Autowired
 	HttpService httpService;
+	@Autowired
+	HttpServiceForRobot httpServiceForRobot;
 	@Autowired
 	private ClusterAccountUdscService clusterAccountUdscService;
 	@Autowired
@@ -126,7 +128,7 @@ public class ClientServerController extends BaseController {
 					.selectByPrimaryKey(Integer.parseInt(dmsId));
 			String url = String
 					.format(reboot_device, clusterDms.getAvailableUrl(), udid);
-			String content = httpService.get(url);
+			String content = httpServiceForRobot.get(url);
 
 			// content = "{\"errCode\" : 0 ,\"errMsg\" : \"xxx\" }";
 
