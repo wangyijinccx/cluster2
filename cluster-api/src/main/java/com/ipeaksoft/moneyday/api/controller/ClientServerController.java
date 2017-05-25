@@ -69,6 +69,7 @@ public class ClientServerController extends BaseController {
 			clusterDms.setUrl(base_url);
 			clusterDms.setName(name);
 			clusterDms.setExtUrl(ext_base_url);
+			clusterDms.setMac(mac);
 			// clusterDms.setStatus("normal");
 			clusterDms.setModifyTime(new Date());
 			clusterDms.setCreateTime(new Date());
