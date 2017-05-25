@@ -48,11 +48,11 @@ public class ClientServerController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/dms_register")
 	public synchronized String dms_register(String base_url, String name,String ext_base_url,
-			String mac,HttpServletRequest request) {
+			String mac_address,HttpServletRequest request) {
 		logger.info("adcluster base_url:{},name:{}" ,base_url,name);
 		String result = "{\"errCode\":0,\"errMsg\":\"添加成功\"}";
 		try {
-			ClusterDms cdms = clusterDmsService.checkDms(mac);
+			ClusterDms cdms = clusterDmsService.checkDms(mac_address);
 			if (null != cdms) {
 				ClusterDms clusterDms = new ClusterDms();
 				clusterDms.setUrl(base_url);
@@ -69,7 +69,7 @@ public class ClientServerController extends BaseController {
 			clusterDms.setUrl(base_url);
 			clusterDms.setName(name);
 			clusterDms.setExtUrl(ext_base_url);
-			clusterDms.setMac(mac);
+			clusterDms.setMac(mac_address);
 			// clusterDms.setStatus("normal");
 			clusterDms.setModifyTime(new Date());
 			clusterDms.setCreateTime(new Date());
