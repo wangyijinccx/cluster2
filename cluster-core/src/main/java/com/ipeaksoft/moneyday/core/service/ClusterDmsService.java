@@ -18,8 +18,8 @@ public class ClusterDmsService {
 		return clusterDmsMapper.insertSelective(record);
 	}
 
-	public ClusterDms checkDms(String name, String url) {
-		return clusterDmsMapper.checkDms(name, url);
+	public ClusterDms checkDms(String mac) {
+		return clusterDmsMapper.checkDms(mac);
 	}
 
 	public List<ClusterDms> selectAll() {

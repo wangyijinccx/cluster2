@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 
-
 public class ClusterDms {
     private Integer id;
 
@@ -21,6 +20,8 @@ public class ClusterDms {
     private String status;
 
     private String extUrl;
+
+    private String mac;
 
     public Integer getId() {
         return id;
@@ -84,6 +85,14 @@ public class ClusterDms {
 
     public void setExtUrl(String extUrl) {
         this.extUrl = extUrl;
+    }
+
+    public String getMac() {
+        return mac;
+    }
+
+    public void setMac(String mac) {
+        this.mac = mac;
     }
     
     public String getAvailableUrl(){

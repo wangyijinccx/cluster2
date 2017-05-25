@@ -20,7 +20,7 @@ public interface ClusterDmsMapper {
 
 	int updateByPrimaryKey(ClusterDms record);
 
-	ClusterDms checkDms(@Param("name") String name, @Param("url") String url);
+	ClusterDms checkDms(@Param("mac") String mac);
 	
 	List<ClusterDms> selectAll();
 }
